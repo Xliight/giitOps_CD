@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service-a
+  namespace: app  # Make sure it's the correct namespace
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: byxlight.com
+    http:
+      paths:
+      - path: /path-a(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: app-spring-app-service
+            port:
+              number: 80
+
