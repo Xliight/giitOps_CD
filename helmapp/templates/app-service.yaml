@@ -1,14 +1,29 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: {{ .Release.Name }}-spring-app-service
+# spec:
+#   selector:
+#     app: {{ .Release.Name }}-spring-app
+#   ports:
+#     - protocol: TCP
+#       port: 30384
+#       targetPort: 30384
+#       nodePort: 30090
+
+#   type: NodePort
+
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-spring-app-service
+  name: app-spring-app-service
 spec:
   selector:
-    app: {{ .Release.Name }}-spring-app
+    app: app-spring-app
   ports:
     - protocol: TCP
-      port: 30384
-      targetPort: 30384
-      nodePort: 30090
+      port: 80 
+      targetPort: 30384 # Your application pod port
+  type: ClusterIP # Use ClusterIP for compatibility with Ingress
 
-  type: NodePort

@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        APP_NAME = "xlight7/ouitripsapp"
+        APP_NAME = "xlight7/cynamoapp"
     }
 
     stages {
@@ -13,7 +13,7 @@ pipeline {
 
         stage("Checkout from SCM") {
             steps {
-                git branch: 'main', changelog: false, credentialsId: 'git_token', poll: false, url: 'https://github.com/Xliight/gitOps_CD.git'
+                git branch: 'main', changelog: false, credentialsId: 'git_token', poll: false, url: 'https://github.com/Xliight/giitOps_CD.git'
             }
         }
 
@@ -33,15 +33,19 @@ pipeline {
                 sh """
                    git config --global user.name "Xliight"
                    git config --global user.email "abdomostme@gmail.com"
+                   
                    cd helmapp
                    git add values.yaml
                    git commit -m "Updated values Manifest"
                 """
                 withCredentials([gitUsernamePassword(credentialsId: 'git_token', gitToolName: 'Default')]) {
-                    sh "git push https://github.com/Xliight/gitOps_CD.git main"
+                    sh "git push https://github.com/Xliight/giitOps_CD.git main"
                 }
             }
         }
+
+
+        
         /**
         stage('Notify Discord') {
             steps {
