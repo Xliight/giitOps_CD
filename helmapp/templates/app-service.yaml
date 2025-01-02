@@ -23,7 +23,7 @@ spec:
     app: {{ .Release.Name }}-spring-app
   ports:
     - protocol: TCP
-      port: 80 # This port is used by Ingress
+      port: 80 
       targetPort: 30384 # Your application pod port
   type: ClusterIP # Use ClusterIP for compatibility with Ingress
 
